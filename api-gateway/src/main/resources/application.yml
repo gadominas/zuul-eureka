@@ -1,0 +1,20 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: zuul-api-gateway-server
+
+zuul:
+  routes:
+    echo:
+      path: /**
+      serviceId: foo-web-service
+      stripPrefix: true
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://eureka-server:8761/eureka/

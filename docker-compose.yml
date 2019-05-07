@@ -1,0 +1,32 @@
+version: '3'
+networks:
+  gde:
+
+services:
+  eureka-server:
+    hostname: eureka-server
+    networks:
+      - gde
+    build: eureka-server
+    ports:
+      - 8000:8761
+  api-gateway:
+    hostname: api-gateway
+    networks:
+      - gde
+    build: api-gateway
+  foo-service:
+    hostname: foo-service
+    networks:
+      - gde
+    build: foo-service
+  foo-consumer:
+    hostname: foo-consumer
+    networks:
+      - gde
+    ports:
+      - 9090:8080
+    build: foo-consumer
+
+# To test run  `curl -v -XGET http://localhost:9090/getFooServerTime`
+# Output headers should contain additional header key: 'proxy-tag' with random UUID value
